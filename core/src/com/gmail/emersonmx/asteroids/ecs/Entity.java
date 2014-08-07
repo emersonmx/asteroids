@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class Entity {
 
-    private static final int DEFAULT_COMPONENT_SIZE = 10;
+    private static final int DEFAULT_COMPONENT_SIZE = 16;
 
     private ObjectMap<Class<? extends Component>, Component> components;
 
