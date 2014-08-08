@@ -17,7 +17,7 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs;
+package com.gmail.emersonmx.asteroids.ecs.component;
 
 public interface Component {
 }

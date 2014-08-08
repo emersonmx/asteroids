@@ -19,10 +19,8 @@
 
 package com.gmail.emersonmx.asteroids.ecs;
 
-public interface System {
+public class EntityManager {
 
-    public void create();
-    public void update(float delta);
-    public void dispose();
+
 
 }

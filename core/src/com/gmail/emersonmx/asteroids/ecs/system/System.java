@@ -17,38 +17,12 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs;
+package com.gmail.emersonmx.asteroids.ecs.system;
 
-import com.badlogic.gdx.utils.Array;
+public interface System {
 
-public class SystemManager {
-
-    private static final int DEFAULT_SYSTEMS_SIZE = 16;
-
-    private Array<System> systems;
-
-    public SystemManager() {
-        this(DEFAULT_SYSTEMS_SIZE);
-    }
-
-    public SystemManager(int size) {
-        systems = new Array<System>(size);
-    }
-
-    public void add(System system) {
-        systems.add(system);
-        system.create();
-    }
-
-    public void remove(System system) {
-        system.dispose();
-        systems.removeValue(system, false);
-    }
-
-    public void updateSystems(float delta) {
-        for (System system : systems) {
-            system.update(delta);
-        }
-    }
+    public void create();
+    public void update(float delta);
+    public void dispose();
 
 }
