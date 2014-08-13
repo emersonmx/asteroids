@@ -1,0 +1,20 @@
+
+asteroids.png
+size: 68,34
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+game/spaceship
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+game/spaceship
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1

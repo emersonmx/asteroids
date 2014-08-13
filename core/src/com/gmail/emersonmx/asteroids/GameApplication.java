@@ -19,23 +19,79 @@
 
 package com.gmail.emersonmx.asteroids;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gmail.emersonmx.asteroids.screen.GameScreen;
 
-public class GameApplication extends ApplicationAdapter {
+public class GameApplication extends Game {
 
     public static final int WINDOW_WIDTH = 640;
     public static final int WINDOW_HEIGHT = 480;
 
-	@Override
-	public void create () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-	}
+    public AssetManager manager;
+    public TextureAtlas atlas;
 
-	@Override
-	public void render () {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
+    public SpriteBatch batch;
+    public Viewport viewport;
+    public OrthographicCamera camera;
+
+    @Override
+    public void create () {
+        createBatch();
+        createCamera();
+        createViewport();
+        loadResources();
+        setupScreens();
+    }
+
+    private void createBatch() {
+        batch = new SpriteBatch();
+    }
+
+    private void createCamera() {
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+    }
+
+    private void createViewport() {
+        viewport = new FitViewport(WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+    }
+
+    private void loadResources() {
+        manager = new AssetManager();
+        manager.load("asteroids.atlas", TextureAtlas.class);
+        manager.finishLoading();
+
+        atlas = manager.get("asteroids.atlas");
+    }
+
+    private void setupScreens() {
+        setScreen(new GameScreen(this));
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+
+        viewport.update(width, height, true);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+
+        batch.dispose();
+        manager.dispose();
+    }
+
+    public void exit() {
+        Gdx.app.exit();
+    }
 
 }
