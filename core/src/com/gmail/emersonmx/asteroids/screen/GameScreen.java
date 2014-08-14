@@ -19,59 +19,89 @@
 
 package com.gmail.emersonmx.asteroids.screen;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.gmail.emersonmx.asteroids.GameApplication;
+import com.gmail.emersonmx.asteroids.ecs.system.DebugPhysicSystem;
+import com.gmail.emersonmx.asteroids.ecs.system.InputSystem;
+import com.gmail.emersonmx.asteroids.ecs.system.PhysicSystem;
+import com.gmail.emersonmx.asteroids.ecs.system.SpriteRenderSystem;
+import com.gmail.emersonmx.asteroids.util.EntityFactory;
+import com.gmail.emersonmx.asteroids.util.PhysicBodyFactory;
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends BaseScreen {
 
-    private final GameApplication app;
+    private World world;
+    private PhysicBodyFactory physicBodyFactory;
+    private Engine engine;
+    private EntityFactory entityFactory;
 
     public GameScreen(GameApplication app) {
-        this.app = app;
+        super(app);
+
+        initializePhysicWorld();
+        initializeEngine();
+    }
+
+    private void initializePhysicWorld() {
+        createWorld();
+        setupBodyFactory();
+    }
+
+    private void createWorld() {
+        world = new World(new Vector2(0, 0), true);
+    }
+
+    private void setupBodyFactory() {
+        physicBodyFactory = new PhysicBodyFactory(world);
+    }
+
+    private void initializeEngine() {
+        createEntityFactory();
+        createEngine();
+        createEntities();
+        createSystems();
+    }
+
+    private void createEntityFactory() {
+        entityFactory = new EntityFactory(app.atlas, physicBodyFactory);
+    }
+
+    private void createEngine() {
+        engine = new Engine();
+    }
+
+    private void createEntities() {
+        engine.addEntity(entityFactory.createSpaceship());
+    }
+
+    private void createSystems() {
+        engine.addSystem(new InputSystem());
+        engine.addSystem(new PhysicSystem(world));
+        engine.addSystem(new SpriteRenderSystem(batch, viewport));
+        engine.addSystem(new DebugPhysicSystem(world));
     }
 
     @Override
     public void show () {
-        setupGL();
+        setupClearColor();
     }
 
-    private void setupGL() {
+    private void setupClearColor() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
     }
 
     @Override
     public void render (float delta) {
-        updateViewport();
-        updateProjectionMatrix();
-        clearScreen();
-        draw();
+        engine.update(delta);
     }
 
-    private void updateViewport() {
-        app.viewport.update();
-    }
-
-    private void updateProjectionMatrix() {
-        app.batch.setProjectionMatrix(app.camera.combined);
-    }
-
-    private void clearScreen() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
-
-    private void draw() {
-        drawBegin();
-        drawEnd();
-    }
-
-    private void drawBegin() {
-        app.batch.begin();
-    }
-
-    private void drawEnd() {
-        app.batch.end();
+    @Override
+    public void dispose() {
+        super.dispose();
+        world.dispose();
     }
 
 }

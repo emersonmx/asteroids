@@ -22,45 +22,23 @@ package com.gmail.emersonmx.asteroids;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gmail.emersonmx.asteroids.screen.GameScreen;
 
 public class GameApplication extends Game {
 
     public static final int WINDOW_WIDTH = 640;
+    public static final int WINDOW_CENTER_X = WINDOW_WIDTH / 2;
     public static final int WINDOW_HEIGHT = 480;
+    public static final int WINDOW_CENTER_Y = WINDOW_HEIGHT / 2;
 
     public AssetManager manager;
     public TextureAtlas atlas;
 
-    public SpriteBatch batch;
-    public Viewport viewport;
-    public OrthographicCamera camera;
-
     @Override
     public void create () {
-        createBatch();
-        createCamera();
-        createViewport();
         loadResources();
         setupScreens();
-    }
-
-    private void createBatch() {
-        batch = new SpriteBatch();
-    }
-
-    private void createCamera() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false);
-    }
-
-    private void createViewport() {
-        viewport = new FitViewport(WINDOW_WIDTH, WINDOW_HEIGHT, camera);
     }
 
     private void loadResources() {
@@ -76,17 +54,9 @@ public class GameApplication extends Game {
     }
 
     @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-
-        viewport.update(width, height, true);
-    }
-
-    @Override
     public void dispose() {
         super.dispose();
 
-        batch.dispose();
         manager.dispose();
     }
 
