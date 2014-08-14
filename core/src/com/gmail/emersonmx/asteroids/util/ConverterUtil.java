@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public final class ConverterUtil {
 
-    public static final float PIXELS_PER_UNIT = 100;
+    public static final float PIXELS_PER_UNIT = 32;
 
     public static float pixelToUnit(float value) {
         return value / PIXELS_PER_UNIT;

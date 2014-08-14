@@ -23,45 +23,37 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.gmail.emersonmx.asteroids.ecs.component.MotionComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.PlayerInputComponent;
+import com.gmail.emersonmx.asteroids.ecs.component.TransformComponent;
 
-public class InputSystem extends IteratingSystem {
+public class MotionSystem extends IteratingSystem {
 
+    private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<MotionComponent> motionMapper;
 
     @SuppressWarnings("unchecked")
-    public InputSystem() {
-        super(Family.getFor(PlayerInputComponent.class, MotionComponent.class));
+    public MotionSystem() {
+        super(Family.getFor(TransformComponent.class,
+                            MotionComponent.class));
 
         setupMappers();
     }
 
     private void setupMappers() {
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
         motionMapper = ComponentMapper.getFor(MotionComponent.class);
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
+        TransformComponent transform = transformMapper.get(entity);
         MotionComponent motion = motionMapper.get(entity);
 
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            motion.direction.rotate(motion.angularVelocity * deltaTime);
-        } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            motion.direction.rotate(-motion.angularVelocity * deltaTime);
-        }
+        transform.position.x += motion.velocity.x * deltaTime;
+        transform.position.y += motion.velocity.y * deltaTime;
+        transform.rotation += motion.velocity.angleRad() * deltaTime;
 
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
-            motion.velocity
-                .add(motion.direction)
-                .scl(motion.acceleration);
-        } else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-            motion.velocity
-                .sub(motion.direction)
-                .scl(motion.acceleration);
-        }
+        motion.velocity.setZero();
     }
 
 }

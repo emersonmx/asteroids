@@ -24,17 +24,19 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MotionComponent extends Component {
 
-
     public Vector2 velocity;
     public Vector2 direction;
-    public float angularSpeed;
+    public float acceleration;
     public float maxSpeed;
+    public float angularVelocity;
 
     public MotionComponent() {
         velocity = new Vector2();
-        direction = new Vector2(0, 1);
-        angularSpeed = 10;
+        direction = new Vector2(1, 0);
+        direction.clamp(-1, 1);
+        acceleration = 1;
         maxSpeed = 1;
+        angularVelocity = 10;
     }
 
 }

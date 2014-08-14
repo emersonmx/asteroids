@@ -63,8 +63,10 @@ public class EntityFactory {
 
     private MotionComponent createSpaceshipMotion() {
         MotionComponent motion = new MotionComponent();
-        motion.angularSpeed = 100;
-        motion.maxSpeed = 10;
+        motion.direction.set(0, 1);
+        motion.acceleration = 1;
+        motion.maxSpeed = 5;
+        motion.angularVelocity = 90;
 
         return motion;
     }

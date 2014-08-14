@@ -98,7 +98,7 @@ public class SpriteRenderSystem extends IteratingSystem {
         SpriteRenderComponent spriteComponent = spriteMapper.get(entity);
         Sprite sprite = spriteComponent.sprite;
 
-        sprite.setPosition(transform.position.x, transform.position.y);
+        sprite.setCenter(transform.position.x, transform.position.y);
         sprite.setRotation(transform.rotation);
 
         sprite.draw(batch);

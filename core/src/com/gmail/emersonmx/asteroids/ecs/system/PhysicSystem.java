@@ -36,6 +36,10 @@ import com.gmail.emersonmx.asteroids.util.ConverterUtil;
 
 public class PhysicSystem extends EntitySystem {
 
+    public static final float TIME_STEP = 1 / 60.f;
+    public static final int VELOCITY_ITERATIONS = 6;
+    public static final int POSITION_ITERATIONS = 2;
+
     private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<MotionComponent> motionMapper;
     private ComponentMapper<PhysicBodyComponent> physicBodyMapper;
@@ -43,11 +47,11 @@ public class PhysicSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
     private World world;
-    private Vector2 tmp;
+    private float accumulator;
 
     public PhysicSystem(World world) {
         this.world = world;
-        tmp = new Vector2();
+        accumulator = 0;
         setupMappers();
     }
 
@@ -73,7 +77,7 @@ public class PhysicSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         processInput(deltaTime);
-        world.step(1 / 60.f, 6, 2);
+        step(deltaTime);
         processOutput();
     }
 
@@ -88,21 +92,19 @@ public class PhysicSystem extends EntitySystem {
         PhysicBodyComponent bodyComponent = physicBodyMapper.get(entity);
 
         Body body = bodyComponent.body;
-        Vector2 velocity = ConverterUtil.pixelToUnit(motion.velocity);
-        applyLinearImpulse(body, velocity);
+        body.applyForce(motion.velocity, body.getWorldCenter(), true);
+        motion.velocity.setZero();
 
-        tmp.set(motion.direction);
-        Vector2 direction = ConverterUtil.pixelToUnit(tmp);
-        applyAngularImpulse(body, direction);
+        body.setTransform(body.getPosition(), motion.direction.angleRad());
     }
 
-    private void applyLinearImpulse(Body body, Vector2 velocity) {
-        body.applyLinearImpulse(velocity, body.getWorldCenter(), true);
-        velocity.setZero();
-    }
-
-    private void applyAngularImpulse(Body body, Vector2 direction) {
-        body.applyAngularImpulse(direction.angleRad(), true);
+    private void step(float deltaTime) {
+        float frameTime = Math.min(deltaTime, 0.25f);
+        accumulator += frameTime;
+        while (accumulator >= TIME_STEP) {
+            world.step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+            accumulator -= TIME_STEP;
+        }
     }
 
     private void processOutput() {
@@ -117,8 +119,9 @@ public class PhysicSystem extends EntitySystem {
         Body body = bodyComponent.body;
 
         Vector2 position = body.getPosition();
-        transform.position.set(ConverterUtil.unitToPixel(position));
+        transform.position = ConverterUtil.unitToPixel(position);
         transform.rotation = body.getAngle() * MathUtils.radiansToDegrees;
+        System.out.println("velocity: " + body.getLinearVelocity());
     }
 
 }

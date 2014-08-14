@@ -80,9 +80,9 @@ public class PhysicBodyFactory {
 
     private Vector2[] createSpaceshipShapeVertices() {
         return new Vector2[] {
-            ConverterUtil.pixelToUnit(new Vector2(0, 0)),
-            ConverterUtil.pixelToUnit(new Vector2(32, 0)),
-            ConverterUtil.pixelToUnit(new Vector2(16, 32))
+            ConverterUtil.pixelToUnit(new Vector2(-16, -16)),
+            ConverterUtil.pixelToUnit(new Vector2(16, 0)),
+            ConverterUtil.pixelToUnit(new Vector2(-16, 16)),
         };
     }
 
