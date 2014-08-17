@@ -47,7 +47,7 @@ public class PhysicBodyFactory {
     public Body createSpaceship() {
         BodyDef bodyDef = createSpaceshipBodyDef();
         Body body = world.createBody(bodyDef);
-        body.setAngularDamping(100);
+        body.setLinearDamping(0.5f);
         PolygonShape shape = createSpaceshipShape();
         FixtureDef fixtureDef = createDefaultFixture();
         fixtureDef.shape = shape;
@@ -80,9 +80,9 @@ public class PhysicBodyFactory {
 
     private Vector2[] createSpaceshipShapeVertices() {
         return new Vector2[] {
-            ConverterUtil.pixelToUnit(new Vector2(-16, -16)),
+            ConverterUtil.pixelToUnit(new Vector2(-16, -8)),
             ConverterUtil.pixelToUnit(new Vector2(16, 0)),
-            ConverterUtil.pixelToUnit(new Vector2(-16, 16)),
+            ConverterUtil.pixelToUnit(new Vector2(-16, 8)),
         };
     }
 

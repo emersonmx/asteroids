@@ -72,7 +72,7 @@ public class EntityFactory {
     }
 
     private Sprite createSpaceshipSprite() {
-        return atlas.createSprites("game/spaceship").get(0);
+        return atlas.createSprite("game/spaceship");
     }
 
     public Entity createBullet() {
