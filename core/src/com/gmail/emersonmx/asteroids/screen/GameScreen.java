@@ -80,7 +80,7 @@ public class GameScreen extends BaseScreen {
     private void createSystems() {
         engine.addSystem(new InputSystem());
         engine.addSystem(new PhysicSystem(world));
-        engine.addSystem(new SpriteRenderSystem(batch, viewport));
+        engine.addSystem(new SpriteRenderSystem(batch, camera));
         engine.addSystem(new DebugPhysicSystem(world));
     }
 

@@ -28,7 +28,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gmail.emersonmx.asteroids.ecs.component.SpriteRenderComponent;
 import com.gmail.emersonmx.asteroids.ecs.component.TransformComponent;
 
@@ -37,17 +36,15 @@ public class SpriteRenderSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<SpriteRenderComponent> spriteMapper;
 
-    private Viewport viewport;
     private Camera camera;
     private SpriteBatch batch;
 
     @SuppressWarnings("unchecked")
-    public SpriteRenderSystem(SpriteBatch batch, Viewport viewport) {
+    public SpriteRenderSystem(SpriteBatch batch, Camera camera) {
         super(Family.getFor(TransformComponent.class,
                             SpriteRenderComponent.class));
 
-        this.viewport = viewport;
-        this.camera = viewport.getCamera();
+        this.camera = camera;
         this.batch = batch;
 
         setupMappers();
@@ -60,14 +57,14 @@ public class SpriteRenderSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime) {
-        updateViewport();
+        updateCamera();
         updateTransformMatrix();
         clearScreen();
         draw(deltaTime);
     }
 
-    private void updateViewport() {
-        viewport.update();
+    private void updateCamera() {
+        camera.update();
     }
 
     private void updateTransformMatrix() {

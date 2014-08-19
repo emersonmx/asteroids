@@ -27,7 +27,6 @@ public class MotionComponent extends Component {
     public Vector2 velocity;
     public Vector2 direction;
     public float acceleration;
-    public float maxSpeed;
     public float angularVelocity;
 
     public MotionComponent() {
@@ -35,7 +34,6 @@ public class MotionComponent extends Component {
         direction = new Vector2(1, 0);
         direction.clamp(-1, 1);
         acceleration = 1;
-        maxSpeed = 1;
         angularVelocity = 10;
     }
 

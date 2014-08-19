@@ -65,7 +65,6 @@ public class EntityFactory {
         MotionComponent motion = new MotionComponent();
         motion.direction.set(0, 1);
         motion.acceleration = 1;
-        motion.maxSpeed = 5;
         motion.angularVelocity = 90;
 
         return motion;

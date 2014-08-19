@@ -49,17 +49,14 @@ public class InputSystem extends IteratingSystem {
 
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             motion.direction.rotate(motion.angularVelocity * deltaTime);
-        } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        }
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             motion.direction.rotate(-motion.angularVelocity * deltaTime);
         }
 
         if (Gdx.input.isKeyPressed(Keys.UP)) {
             motion.velocity
                 .add(motion.direction)
-                .scl(motion.acceleration);
-        } else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-            motion.velocity
-                .sub(motion.direction)
                 .scl(motion.acceleration);
         }
     }
