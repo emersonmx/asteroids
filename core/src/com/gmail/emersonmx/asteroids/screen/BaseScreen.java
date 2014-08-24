@@ -21,11 +21,15 @@ package com.gmail.emersonmx.asteroids.screen;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gmail.emersonmx.asteroids.game.Asteroids;
+import com.gmail.emersonmx.asteroids.game.Space;
 
 public class BaseScreen extends ScreenAdapter {
+
+    protected SpriteBatch batch;
 
     protected Viewport viewport;
     protected OrthographicCamera camera;
@@ -34,6 +38,7 @@ public class BaseScreen extends ScreenAdapter {
 
     public BaseScreen(Asteroids app) {
         this.app = app;
+        this.batch = app.batch;
 
         create();
     }
@@ -44,14 +49,12 @@ public class BaseScreen extends ScreenAdapter {
     }
 
     private void createViewport() {
-        viewport = new FitViewport(Asteroids.WINDOW_WIDTH,
-                                   Asteroids.WINDOW_HEIGHT);
+        viewport = new FitViewport(Space.WIDTH, Space.HEIGHT);
     }
 
     private void setupCamera() {
         camera = (OrthographicCamera) viewport.getCamera();
-        camera.setToOrtho(false, Asteroids.WINDOW_WIDTH,
-                          Asteroids.WINDOW_HEIGHT);
+        camera.setToOrtho(false, Space.WIDTH, Space.HEIGHT);
     }
 
 	@Override

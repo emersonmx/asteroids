@@ -22,6 +22,7 @@ package com.gmail.emersonmx.asteroids.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.gmail.emersonmx.asteroids.game.Asteroids;
+import com.gmail.emersonmx.asteroids.game.Space;
 
 public class DesktopLauncher {
 
@@ -30,8 +31,8 @@ public class DesktopLauncher {
             new LwjglApplicationConfiguration();
 
         config.title = "Asteroids";
-        config.width = Asteroids.WINDOW_WIDTH;
-        config.height = Asteroids.WINDOW_HEIGHT;
+        config.width = Space.WIDTH;
+        config.height = Space.HEIGHT;
 
         new LwjglApplication(new Asteroids(), config);
     }

@@ -20,23 +20,20 @@
 package com.gmail.emersonmx.asteroids.util;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.gmail.emersonmx.asteroids.component.MotionComponent;
 import com.gmail.emersonmx.asteroids.component.PhysicBodyComponent;
 import com.gmail.emersonmx.asteroids.component.PlayerInputComponent;
 import com.gmail.emersonmx.asteroids.component.SpriteRenderComponent;
 import com.gmail.emersonmx.asteroids.component.TransformComponent;
+import com.gmail.emersonmx.asteroids.game.Assets;
 
 public class EntityFactory {
 
-    private TextureAtlas atlas;
+    private Assets assets;
     private PhysicBodyFactory physicBodyFactory;
 
-    public EntityFactory(TextureAtlas atlas,
-            PhysicBodyFactory physicBodyFactory) {
-
-        this.atlas = atlas;
+    public EntityFactory(Assets assets, PhysicBodyFactory physicBodyFactory) {
+        this.assets = assets;
         this.physicBodyFactory = physicBodyFactory;
     }
 
@@ -52,7 +49,7 @@ public class EntityFactory {
         spaceship.add(new PlayerInputComponent());
         spaceship.add(
             new PhysicBodyComponent(physicBodyFactory.createSpaceship()));
-        spaceship.add(new SpriteRenderComponent(createSpaceshipSprite()));
+        spaceship.add(new SpriteRenderComponent(assets.spaceship));
 
         return spaceship;
     }
@@ -68,10 +65,6 @@ public class EntityFactory {
         motion.angularVelocity = 90;
 
         return motion;
-    }
-
-    private Sprite createSpaceshipSprite() {
-        return atlas.createSprite("game/spaceship");
     }
 
     public Entity createBullet() {

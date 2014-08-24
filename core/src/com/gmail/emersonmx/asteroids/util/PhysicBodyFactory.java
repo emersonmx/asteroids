@@ -26,7 +26,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gmail.emersonmx.asteroids.game.Asteroids;
+import com.gmail.emersonmx.asteroids.game.Space;
 
 public class PhysicBodyFactory {
 
@@ -60,10 +60,8 @@ public class PhysicBodyFactory {
     private BodyDef createSpaceshipBodyDef() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyType.DynamicBody;
-        float centerX =
-            ConverterUtil.pixelToUnit(Asteroids.WINDOW_CENTER_X);
-        float centerY =
-            ConverterUtil.pixelToUnit(Asteroids.WINDOW_CENTER_Y);
+        float centerX = ConverterUtil.pixelToUnit(Space.CENTER_X);
+        float centerY = ConverterUtil.pixelToUnit(Space.CENTER_Y);
 
         bodyDef.position.set(centerX, centerY);
 

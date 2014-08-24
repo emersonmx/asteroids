@@ -26,9 +26,6 @@ import com.gmail.emersonmx.asteroids.screen.GameScreen;
 
 public class Asteroids extends Game {
 
-    public static final int WINDOW_WIDTH = 640;
-    public static final int WINDOW_HEIGHT = 480;
-
     public Assets assets;
     public SpriteBatch batch;
 
@@ -40,6 +37,7 @@ public class Asteroids extends Game {
     }
 
     private void loadAssets() {
+        assets = new Assets();
         assets.load();
     }
 
