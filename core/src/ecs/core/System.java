@@ -17,17 +17,15 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.component;
+package ecs.core;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.physics.box2d.Body;
+public class System {
 
-public class PhysicBodyComponent extends Component {
+    public void update(float deltaTime) {
+    }
 
-    public Body body;
-
-    public PhysicBodyComponent(Body body) {
-        this.body = body;
+    public boolean isActive() {
+        return true;
     }
 
 }

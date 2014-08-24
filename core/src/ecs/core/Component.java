@@ -17,24 +17,8 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.component;
+package ecs.core;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
-
-public class MovementComponent extends Component {
-
-    public Vector2 velocity;
-    public Vector2 direction;
-    public float acceleration;
-    public float angularVelocity;
-
-    public MovementComponent() {
-        velocity = new Vector2();
-        direction = new Vector2(1, 0);
-        direction.clamp(-1, 1);
-        acceleration = 1;
-        angularVelocity = 10;
-    }
+public interface Component {
 
 }

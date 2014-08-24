@@ -19,69 +19,27 @@
 
 package com.gmail.emersonmx.asteroids.screen;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.gmail.emersonmx.asteroids.game.Asteroids;
-import com.gmail.emersonmx.asteroids.system.DebugPhysicSystem;
-import com.gmail.emersonmx.asteroids.system.InputSystem;
-import com.gmail.emersonmx.asteroids.system.PhysicSystem;
-import com.gmail.emersonmx.asteroids.system.SpriteRenderSystem;
-import com.gmail.emersonmx.asteroids.util.EntityFactory;
-import com.gmail.emersonmx.asteroids.util.PhysicBodyFactory;
 
 public class GameScreen extends BaseScreen {
 
     private World world;
-    private PhysicBodyFactory physicBodyFactory;
-    private Engine engine;
-    private EntityFactory entityFactory;
 
     public GameScreen(Asteroids app) {
         super(app);
 
         initializePhysicWorld();
-        initializeEngine();
     }
 
     private void initializePhysicWorld() {
         createWorld();
-        setupBodyFactory();
     }
 
     private void createWorld() {
         world = new World(new Vector2(0, 0), true);
-    }
-
-    private void setupBodyFactory() {
-        physicBodyFactory = new PhysicBodyFactory(world);
-    }
-
-    private void initializeEngine() {
-        createEntityFactory();
-        createEngine();
-        createEntities();
-        createSystems();
-    }
-
-    private void createEntityFactory() {
-        entityFactory = new EntityFactory(app.assets, physicBodyFactory);
-    }
-
-    private void createEngine() {
-        engine = new Engine();
-    }
-
-    private void createEntities() {
-        engine.addEntity(entityFactory.createSpaceship());
-    }
-
-    private void createSystems() {
-        engine.addSystem(new InputSystem());
-        engine.addSystem(new PhysicSystem(world));
-        engine.addSystem(new SpriteRenderSystem(batch, camera));
-        engine.addSystem(new DebugPhysicSystem(world));
     }
 
     @Override
@@ -95,7 +53,6 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void render (float delta) {
-        engine.update(delta);
     }
 
     @Override
