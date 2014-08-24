@@ -17,17 +17,8 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs.component;
+package com.gmail.emersonmx.asteroids.game;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.physics.box2d.Body;
-
-public class PhysicBodyComponent extends Component {
-
-    public Body body;
-
-    public PhysicBodyComponent(Body body) {
-        this.body = body;
-    }
+public class Space {
 
 }

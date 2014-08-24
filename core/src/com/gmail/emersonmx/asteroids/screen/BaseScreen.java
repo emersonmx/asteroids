@@ -21,54 +21,42 @@ package com.gmail.emersonmx.asteroids.screen;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gmail.emersonmx.asteroids.GameApplication;
+import com.gmail.emersonmx.asteroids.game.Asteroids;
 
 public class BaseScreen extends ScreenAdapter {
 
-    protected SpriteBatch batch;
     protected Viewport viewport;
     protected OrthographicCamera camera;
 
-    protected final GameApplication app;
+    protected final Asteroids app;
 
-    public BaseScreen(GameApplication app) {
+    public BaseScreen(Asteroids app) {
         this.app = app;
 
         create();
     }
 
     private void create() {
-        createBatch();
         createViewport();
         setupCamera();
     }
 
-    private void createBatch() {
-        batch = new SpriteBatch();
-    }
-
     private void createViewport() {
-        viewport = new FitViewport(GameApplication.WINDOW_WIDTH,
-                                   GameApplication.WINDOW_HEIGHT);
+        viewport = new FitViewport(Asteroids.WINDOW_WIDTH,
+                                   Asteroids.WINDOW_HEIGHT);
     }
 
     private void setupCamera() {
         camera = (OrthographicCamera) viewport.getCamera();
-        camera.setToOrtho(false, GameApplication.WINDOW_WIDTH,
-                          GameApplication.WINDOW_HEIGHT);
+        camera.setToOrtho(false, Asteroids.WINDOW_WIDTH,
+                          Asteroids.WINDOW_HEIGHT);
     }
 
 	@Override
 	public void resize (int width, int height) {
         viewport.update(width, height, true);
-	}
-
-	@Override
-	public void dispose () {
-        batch.dispose();
 	}
 
 }

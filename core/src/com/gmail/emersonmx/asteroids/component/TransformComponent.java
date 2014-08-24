@@ -17,17 +17,24 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs.component;
+package com.gmail.emersonmx.asteroids.component;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
-public class SpriteRenderComponent extends Component {
+public class TransformComponent extends Component {
 
-    public Sprite sprite;
+    public Vector2 position;
+    public float rotation;
 
-    public SpriteRenderComponent(Sprite sprite) {
-        this.sprite = sprite;
+    public TransformComponent() {
+        position = new Vector2();
+        rotation = 0;
+    }
+
+    public TransformComponent(Vector2 position, float rotation) {
+        this.position = position;
+        this.rotation = rotation;
     }
 
 }

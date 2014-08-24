@@ -17,7 +17,7 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs.system;
+package com.gmail.emersonmx.asteroids.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -28,8 +28,8 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.gmail.emersonmx.asteroids.ecs.component.SpriteRenderComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.TransformComponent;
+import com.gmail.emersonmx.asteroids.component.SpriteRenderComponent;
+import com.gmail.emersonmx.asteroids.component.TransformComponent;
 
 public class SpriteRenderSystem extends IteratingSystem {
 

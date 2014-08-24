@@ -17,13 +17,13 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs.system;
+package com.gmail.emersonmx.asteroids.system;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gmail.emersonmx.asteroids.GameApplication;
+import com.gmail.emersonmx.asteroids.game.Asteroids;
 import com.gmail.emersonmx.asteroids.util.ConverterUtil;
 
 public class DebugPhysicSystem extends EntitySystem {
@@ -43,8 +43,8 @@ public class DebugPhysicSystem extends EntitySystem {
     }
 
     private void createCamera() {
-        float width = ConverterUtil.pixelToUnit(GameApplication.WINDOW_WIDTH);
-        float height = ConverterUtil.pixelToUnit(GameApplication.WINDOW_HEIGHT);
+        float width = ConverterUtil.pixelToUnit(Asteroids.WINDOW_WIDTH);
+        float height = ConverterUtil.pixelToUnit(Asteroids.WINDOW_HEIGHT);
         camera = new OrthographicCamera(width, height);
         camera.setToOrtho(false, width, height);
     }

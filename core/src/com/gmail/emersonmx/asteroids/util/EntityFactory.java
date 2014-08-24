@@ -22,11 +22,11 @@ package com.gmail.emersonmx.asteroids.util;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.gmail.emersonmx.asteroids.ecs.component.MotionComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.PhysicBodyComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.PlayerInputComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.SpriteRenderComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.TransformComponent;
+import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.PhysicBodyComponent;
+import com.gmail.emersonmx.asteroids.component.PlayerInputComponent;
+import com.gmail.emersonmx.asteroids.component.SpriteRenderComponent;
+import com.gmail.emersonmx.asteroids.component.TransformComponent;
 
 public class EntityFactory {
 

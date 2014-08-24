@@ -17,23 +17,9 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.desktop;
+package com.gmail.emersonmx.asteroids.component;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.gmail.emersonmx.asteroids.game.Asteroids;
+import com.badlogic.ashley.core.Component;
 
-public class DesktopLauncher {
-
-    public static void main (String[] arg) {
-        LwjglApplicationConfiguration config =
-            new LwjglApplicationConfiguration();
-
-        config.title = "Asteroids";
-        config.width = Asteroids.WINDOW_WIDTH;
-        config.height = Asteroids.WINDOW_HEIGHT;
-
-        new LwjglApplication(new Asteroids(), config);
-    }
-
+public class PlayerInputComponent extends Component {
 }

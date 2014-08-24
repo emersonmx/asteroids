@@ -23,11 +23,11 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gmail.emersonmx.asteroids.GameApplication;
-import com.gmail.emersonmx.asteroids.ecs.system.DebugPhysicSystem;
-import com.gmail.emersonmx.asteroids.ecs.system.InputSystem;
-import com.gmail.emersonmx.asteroids.ecs.system.PhysicSystem;
-import com.gmail.emersonmx.asteroids.ecs.system.SpriteRenderSystem;
+import com.gmail.emersonmx.asteroids.system.DebugPhysicSystem;
+import com.gmail.emersonmx.asteroids.system.InputSystem;
+import com.gmail.emersonmx.asteroids.system.PhysicSystem;
+import com.gmail.emersonmx.asteroids.system.SpriteRenderSystem;
+import com.gmail.emersonmx.asteroids.game.Asteroids;
 import com.gmail.emersonmx.asteroids.util.EntityFactory;
 import com.gmail.emersonmx.asteroids.util.PhysicBodyFactory;
 
@@ -38,7 +38,7 @@ public class GameScreen extends BaseScreen {
     private Engine engine;
     private EntityFactory entityFactory;
 
-    public GameScreen(GameApplication app) {
+    public GameScreen(Asteroids app) {
         super(app);
 
         initializePhysicWorld();

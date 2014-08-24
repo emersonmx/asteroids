@@ -23,7 +23,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.gmail.emersonmx.asteroids.GameApplication;
+import com.gmail.emersonmx.asteroids.game.Asteroids;
 
 public class AndroidLauncher extends AndroidApplication {
 
@@ -36,7 +36,7 @@ public class AndroidLauncher extends AndroidApplication {
 
         config.useWakelock = true;
 
-        initialize(new GameApplication(), config);
+        initialize(new Asteroids(), config);
     }
 
 }

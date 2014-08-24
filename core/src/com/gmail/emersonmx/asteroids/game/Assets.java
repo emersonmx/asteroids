@@ -17,51 +17,44 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids;
+package com.gmail.emersonmx.asteroids.game;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.gmail.emersonmx.asteroids.screen.GameScreen;
+import com.badlogic.gdx.utils.Disposable;
 
-public class GameApplication extends Game {
+public class Assets implements Disposable {
 
-    public static final int WINDOW_WIDTH = 640;
-    public static final int WINDOW_CENTER_X = WINDOW_WIDTH / 2;
-    public static final int WINDOW_HEIGHT = 480;
-    public static final int WINDOW_CENTER_Y = WINDOW_HEIGHT / 2;
+    private AssetManager manager;
+    private TextureAtlas atlas;
 
-    public AssetManager manager;
-    public TextureAtlas atlas;
+    public Sprite spaceship;
+    public Sprite bullet;
 
-    @Override
-    public void create () {
+    public void load() {
         loadResources();
-        setupScreens();
+        setupResources();
     }
 
     private void loadResources() {
         manager = new AssetManager();
         manager.load("asteroids.atlas", TextureAtlas.class);
         manager.finishLoading();
-
-        atlas = manager.get("asteroids.atlas");
     }
 
-    private void setupScreens() {
-        setScreen(new GameScreen(this));
+    private void setupResources() {
+        atlas = manager.get("asteroids.atlas");
+
+        spaceship = atlas.createSprite("game/spaceship");
+        bullet = atlas.createSprite("game/bullet");
     }
 
     @Override
     public void dispose() {
-        super.dispose();
-
-        manager.dispose();
-    }
-
-    public void exit() {
-        Gdx.app.exit();
+        if (manager != null) {
+            manager.dispose();
+        }
     }
 
 }

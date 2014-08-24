@@ -17,7 +17,7 @@
   along with asteroids.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.gmail.emersonmx.asteroids.ecs.system;
+package com.gmail.emersonmx.asteroids.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -29,9 +29,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gmail.emersonmx.asteroids.ecs.component.MotionComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.PhysicBodyComponent;
-import com.gmail.emersonmx.asteroids.ecs.component.TransformComponent;
+import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.PhysicBodyComponent;
+import com.gmail.emersonmx.asteroids.component.TransformComponent;
 import com.gmail.emersonmx.asteroids.util.ConverterUtil;
 
 public class PhysicSystem extends EntitySystem {
