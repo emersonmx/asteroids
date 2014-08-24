@@ -20,7 +20,7 @@
 package com.gmail.emersonmx.asteroids.util;
 
 import com.badlogic.ashley.core.Entity;
-import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.MovementComponent;
 import com.gmail.emersonmx.asteroids.component.PhysicBodyComponent;
 import com.gmail.emersonmx.asteroids.component.PlayerInputComponent;
 import com.gmail.emersonmx.asteroids.component.SpriteRenderComponent;
@@ -58,8 +58,8 @@ public class EntityFactory {
         return new TransformComponent();
     }
 
-    private MotionComponent createSpaceshipMotion() {
-        MotionComponent motion = new MotionComponent();
+    private MovementComponent createSpaceshipMotion() {
+        MovementComponent motion = new MovementComponent();
         motion.direction.set(0, 1);
         motion.acceleration = 1;
         motion.angularVelocity = 90;

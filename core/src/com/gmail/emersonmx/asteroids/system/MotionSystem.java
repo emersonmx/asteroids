@@ -23,31 +23,31 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.MovementComponent;
 import com.gmail.emersonmx.asteroids.component.TransformComponent;
 
 public class MotionSystem extends IteratingSystem {
 
     private ComponentMapper<TransformComponent> transformMapper;
-    private ComponentMapper<MotionComponent> motionMapper;
+    private ComponentMapper<MovementComponent> motionMapper;
 
     @SuppressWarnings("unchecked")
     public MotionSystem() {
         super(Family.getFor(TransformComponent.class,
-                            MotionComponent.class));
+                            MovementComponent.class));
 
         setupMappers();
     }
 
     private void setupMappers() {
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
-        motionMapper = ComponentMapper.getFor(MotionComponent.class);
+        motionMapper = ComponentMapper.getFor(MovementComponent.class);
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         TransformComponent transform = transformMapper.get(entity);
-        MotionComponent motion = motionMapper.get(entity);
+        MovementComponent motion = motionMapper.get(entity);
 
         transform.position.x += motion.velocity.x * deltaTime;
         transform.position.y += motion.velocity.y * deltaTime;

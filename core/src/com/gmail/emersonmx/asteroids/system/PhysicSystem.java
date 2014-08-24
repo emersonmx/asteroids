@@ -29,7 +29,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.MovementComponent;
 import com.gmail.emersonmx.asteroids.component.PhysicBodyComponent;
 import com.gmail.emersonmx.asteroids.component.TransformComponent;
 import com.gmail.emersonmx.asteroids.util.ConverterUtil;
@@ -41,7 +41,7 @@ public class PhysicSystem extends EntitySystem {
     public static final int POSITION_ITERATIONS = 2;
 
     private ComponentMapper<TransformComponent> transformMapper;
-    private ComponentMapper<MotionComponent> motionMapper;
+    private ComponentMapper<MovementComponent> motionMapper;
     private ComponentMapper<PhysicBodyComponent> physicBodyMapper;
 
     private ImmutableArray<Entity> entities;
@@ -57,7 +57,7 @@ public class PhysicSystem extends EntitySystem {
 
     private void setupMappers() {
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
-        motionMapper = ComponentMapper.getFor(MotionComponent.class);
+        motionMapper = ComponentMapper.getFor(MovementComponent.class);
         physicBodyMapper = ComponentMapper.getFor(PhysicBodyComponent.class);
     }
 
@@ -65,7 +65,7 @@ public class PhysicSystem extends EntitySystem {
     @SuppressWarnings("unchecked")
     public void addedToEngine(Engine engine) {
         Family family = Family.getFor(TransformComponent.class,
-            MotionComponent.class, PhysicBodyComponent.class);
+            MovementComponent.class, PhysicBodyComponent.class);
         entities = engine.getEntitiesFor(family);
     }
 
@@ -88,7 +88,7 @@ public class PhysicSystem extends EntitySystem {
     }
 
     private void processInputEntity(Entity entity, float deltaTime) {
-        MotionComponent motion = motionMapper.get(entity);
+        MovementComponent motion = motionMapper.get(entity);
         PhysicBodyComponent bodyComponent = physicBodyMapper.get(entity);
 
         Body body = bodyComponent.body;

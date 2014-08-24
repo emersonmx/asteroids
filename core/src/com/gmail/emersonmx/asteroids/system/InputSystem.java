@@ -25,27 +25,28 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.gmail.emersonmx.asteroids.component.MotionComponent;
+import com.gmail.emersonmx.asteroids.component.MovementComponent;
 import com.gmail.emersonmx.asteroids.component.PlayerInputComponent;
 
 public class InputSystem extends IteratingSystem {
 
-    private ComponentMapper<MotionComponent> motionMapper;
+    private ComponentMapper<MovementComponent> motionMapper;
 
     @SuppressWarnings("unchecked")
     public InputSystem() {
-        super(Family.getFor(PlayerInputComponent.class, MotionComponent.class));
+        super(Family.getFor(PlayerInputComponent.class,
+                            MovementComponent.class));
 
         setupMappers();
     }
 
     private void setupMappers() {
-        motionMapper = ComponentMapper.getFor(MotionComponent.class);
+        motionMapper = ComponentMapper.getFor(MovementComponent.class);
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        MotionComponent motion = motionMapper.get(entity);
+        MovementComponent motion = motionMapper.get(entity);
 
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             motion.direction.rotate(motion.angularVelocity * deltaTime);
